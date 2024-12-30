@@ -7,18 +7,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 97eeafc89335f6b2ad5a3c032a5e2f92a98962faa4425e2eb8ef0b4cb12866fd
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - certifi
     - cycler
@@ -38,7 +38,7 @@ requirements:
     - pandas
     - pillow
     - pyparsing
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil
     - pytz
     - pywavelets
@@ -48,6 +48,8 @@ requirements:
     - six
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - medcam
 
